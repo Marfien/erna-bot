@@ -10,12 +10,11 @@ The one dnd bot to rule them all.
 - [ ] Inventory management
 - [ ] Status effects
 - [ ] character sheets
+- [ ] Store data in database
 - [ ] map viewer
+- [ ] optional turnbased actions
 - [ ] AI theming
-
   - [ ] AI map generation?
   - [ ] AI soundtrack generation
   - [ ] character avatar
   - [ ] thumbnail
-
-- [ ] Store data in database
