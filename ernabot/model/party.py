@@ -1,7 +1,7 @@
 from ernabot.model.character import Character
 
 
-class Game:
+class Party:
     def __init__(self, name: str, guild_id: str, master: str) -> None:
         self.name = name
         self.guild_id = guild_id
