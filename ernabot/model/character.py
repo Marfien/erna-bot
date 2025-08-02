@@ -1,32 +1,29 @@
-import datetime
+import peewee
+
+from ernabot.model import BaseModel
+from ernabot.model.party import Party
 
 
-class StatusEffect:
-    def __init__(
-        self,
-        description: str,
-        applied_at: datetime.datetime | None = None,
-        extra: str | None = None,
-    ) -> None:
-        self.description = description
-        self.extra = extra
-
-        if applied_at is None:
-            self.applied_at = datetime.datetime.now()
-            self.applied_at = applied_at
+class Character(BaseModel):
+    id = peewee.IdentityField()
+    party = peewee.ForeignKeyField(Party)
+    name = peewee.CharField(unique=True)
+    description = peewee.CharField()
+    picture = peewee.BlobField()
+    inventory = None
+    discord_user_id = peewee.UUIDField()
 
 
-class Character:
-    def __init__(
-        self,
-        name: str,
-        description: str,
-        user_id: str,
-        picture: bytearray | None = None,
-    ) -> None:
-        self.name = name
-        self.description = description
-        self.picture = picture
-        self.inventory: dict[str, int] = {}
-        self.status_effects: list[StatusEffect] = []
-        self.user_id = user_id
+class StatusEffect(BaseModel):
+    id = peewee.IdentityField()
+    character = peewee.ForeignKeyField(Character)
+    description = peewee.CharField()
+    applied_at = peewee.DateTimeField()
+    extra = peewee.CharField()
+
+
+class inventoryItem(BaseModel):
+    id = peewee.IdentityField()
+    character = peewee.ForeignKeyField(Character)
+    name = peewee.CharField()
+    amount = peewee.IntegerField(default=1)

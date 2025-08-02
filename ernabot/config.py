@@ -51,3 +51,6 @@ class EnvConfig(Config):
     @property
     def database(self) -> DatabaseConfig:
         return self._database
+
+
+selected = EnvConfig()
