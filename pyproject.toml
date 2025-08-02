@@ -7,4 +7,4 @@ readme = "README.md"
 authors = [{ name = "Marfien", email = "contact@marfien.dev" }]
 
 requires-python = ">= 3.10"
-dependencies = ["py-cord >= 2.6"]
+dependencies = ["py-cord >= 2.6", "peewee >= 3.0"]
