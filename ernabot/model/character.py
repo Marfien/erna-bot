@@ -22,7 +22,7 @@ class StatusEffect(BaseModel):
     extra = peewee.CharField()
 
 
-class inventoryItem(BaseModel):
+class InventoryItem(BaseModel):
     id = peewee.IdentityField()
     character = peewee.ForeignKeyField(Character)
     name = peewee.CharField()

@@ -1,5 +1,4 @@
 from ernabot.model import BaseModel
-from ernabot.model.character import Character
 import peewee
 
 
