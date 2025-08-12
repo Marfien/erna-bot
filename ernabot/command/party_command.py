@@ -20,11 +20,12 @@ async def create(
     ),
 ):
     if not channel:
-        channel = ctx.channel()
+        channel = ctx.channel
     if not dungeon_master:
-        dungeon_master = ctx.user()
+        dungeon_master = ctx.user
 
-    service.create_party(name, channel.id, dungeon_master.id)
+    party = service.create_party(name, channel.id, dungeon_master.id)
+    await ctx.respond(f"Party created with id {party.id}")
 
 
 @group.command()

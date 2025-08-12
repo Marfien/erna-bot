@@ -5,4 +5,4 @@ description = "A discord bot for managing your DnD parties"
 readme = "README.md"
 requires-python = ">=3.13"
 authors = [{ name = "Marfien", email = "contact@marfien.dev" }]
-dependencies = ["peewee>=3.6", "py-cord>=2.6"]
+dependencies = ["audioop-lts>=0.2.2", "peewee>=3.6", "py-cord>=2.6"]

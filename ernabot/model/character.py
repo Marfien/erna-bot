@@ -5,7 +5,7 @@ from ernabot.model.party import Party
 
 
 class Character(BaseModel):
-    id = peewee.IdentityField()
+    id = peewee.AutoField()
     party = peewee.ForeignKeyField(Party)
     name = peewee.CharField(unique=True)
     description = peewee.CharField()
@@ -15,7 +15,7 @@ class Character(BaseModel):
 
 
 class StatusEffect(BaseModel):
-    id = peewee.IdentityField()
+    id = peewee.AutoField()
     character = peewee.ForeignKeyField(Character)
     description = peewee.CharField()
     applied_at = peewee.DateTimeField()
@@ -23,7 +23,7 @@ class StatusEffect(BaseModel):
 
 
 class InventoryItem(BaseModel):
-    id = peewee.IdentityField()
+    id = peewee.AutoField()
     character = peewee.ForeignKeyField(Character)
     name = peewee.CharField()
     amount = peewee.IntegerField(default=1)

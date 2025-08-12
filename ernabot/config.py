@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 import os
 
 
 class DatabaseConfig:
-    type: str
     username: str | None
     password: str | None
     host: str | None
@@ -29,7 +29,6 @@ class EnvConfig(Config):
         super().__init__()
 
         self._database = DatabaseConfig()
-        self._database.type = os.getenv("ERNA_DB_TYPE", "sqlite")
         self._database.username = os.getenv("ERNA_DB_USERNAME")
         self._database.password = os.getenv("ERNA_DB_PASSWORD")
         self._database.host = os.getenv("ERNA_DB_HOST")
@@ -53,4 +52,6 @@ class EnvConfig(Config):
         return self._database
 
 
-selected = EnvConfig()
+_config_types: dict[str, Callable[[], Config]] = {"environment": lambda: EnvConfig()}
+
+selected: Config = _config_types[os.getenv("ERNA_CONFIG_TYPE", "environment")]()
