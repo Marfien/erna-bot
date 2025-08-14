@@ -3,7 +3,7 @@ import peewee
 
 
 class Party(BaseModel):
-    id = peewee.AutoField()
+    # One party per channel
+    channel_id = peewee.UUIDField(primary_key=True)
     name = peewee.CharField()
-    channel_id = peewee.UUIDField()
     dungeon_master_id = peewee.UUIDField()
