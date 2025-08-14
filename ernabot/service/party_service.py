@@ -1,7 +1,27 @@
+from ernabot.exception import (
+    PartyAlreadyExistsException,
+    PartyNotFoundException,
+    PartyNotPermittedException,
+)
 from ernabot.model.party import Party
 
 
 def create_party(name: str, channel_id: str, dungeon_master_id: str) -> Party:
+    if Party.select(Party.channel_id).where(Party.channel_id == channel_id).exists():
+        raise PartyAlreadyExistsException(channel_id)
+
     party = Party(name=name, channel_id=channel_id, dungeon_master_id=dungeon_master_id)
     party.save()
     return party
+
+
+def delete_party(executor_id: str, channel_id: str):
+    party = Party.select(Party.dungeon_master_id).where(Party.channel_id == channel_id)
+
+    if not party:
+        raise PartyNotFoundException(channel_id)
+
+    if party.dungeon_master_id != executor_id:
+        raise PartyNotPermittedException(party.dungeon_master_id)
+
+    party.delete_instance()
