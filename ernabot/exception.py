@@ -34,3 +34,18 @@ class PartyNotPermittedException(ErnaException):
         self.user_message = (
             f"Pesant! That's a job for the mighty {mention_user(dungeon_master_id)}."
         )
+
+
+class CharacterAlreadyExistsException(ErnaException):
+    def __init__(self, name: str) -> None:
+        self.user_message = f"Hypocrit! I already know someone called {name} and you are nothing like them!"
+
+
+class CharacterUnsupportedContentTypeException(ErnaException):
+    def __init__(self, content_type: str) -> None:
+        self.user_message = f"Anything but `image/jpeg` and `image/png` is blasfirmy! This `{content_type}` must be a false god!"
+
+
+class UserHasAlreadyCharacterException(ErnaException):
+    def __init__(self, user_id: str, name: str) -> None:
+        self.user_message = f"Only one servant per master allowed! There is already {name} on the side of {mention_user(user_id)}."

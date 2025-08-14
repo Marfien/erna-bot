@@ -10,12 +10,13 @@ def create_party(name: str, channel_id: str, dungeon_master_id: str) -> Party:
     if Party.select(Party.channel_id).where(Party.channel_id == channel_id).exists():
         raise PartyAlreadyExistsException(channel_id)
 
-    party = Party(name=name, channel_id=channel_id, dungeon_master_id=dungeon_master_id)
-    party.save()
+    party = Party.create(
+        name=name, channel_id=channel_id, dungeon_master_id=dungeon_master_id
+    )
     return party
 
 
-def delete_party(executor_id: str, channel_id: str):
+def delete_party(executor_id: str, channel_id: str) -> None:
     party = Party.select(Party.dungeon_master_id).where(Party.channel_id == channel_id)
 
     if not party:

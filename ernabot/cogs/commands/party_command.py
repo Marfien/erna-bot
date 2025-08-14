@@ -42,14 +42,7 @@ class PartyCommand(commands.Cog):
         executer_id = ctx.user.id
 
         try:
-            party = service.delete_party(executer_id, channel_id)
+            service.delete_party(executer_id, channel_id)
+            await ctx.respond("The party was resolved.")
         except Exception as ex:
             await handle_exception(ex, ctx.respond)
-
-    @group.command()
-    async def remove(ctx: discord.ApplicationContext, other):
-        pass
-
-    @group.command()
-    async def add(ctx: discord.ApplicationContext, other):
-        pass
