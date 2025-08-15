@@ -6,7 +6,7 @@ from ernabot.exception import (
 from ernabot.model.party import Party
 
 
-def create_party(name: str, channel_id: str, dungeon_master_id: str) -> Party:
+def create(name: str, channel_id: str, dungeon_master_id: str) -> Party:
     if Party.select(Party.channel_id).where(Party.channel_id == channel_id).exists():
         raise PartyAlreadyExistsException(channel_id)
 
@@ -16,8 +16,10 @@ def create_party(name: str, channel_id: str, dungeon_master_id: str) -> Party:
     return party
 
 
-def delete_party(executor_id: str, channel_id: str) -> None:
-    party = Party.select(Party.dungeon_master_id).where(Party.channel_id == channel_id)
+def delete(executor_id: str, channel_id: str) -> Party:
+    party = Party.select(Party.dungeon_master_id, Party.name).where(
+        Party.channel_id == channel_id
+    )
 
     if not party:
         raise PartyNotFoundException(channel_id)
@@ -26,3 +28,4 @@ def delete_party(executor_id: str, channel_id: str) -> None:
         raise PartyNotPermittedException(party.dungeon_master_id)
 
     party.delete_instance()
+    return party

@@ -29,9 +29,9 @@ class PartyCommand(commands.Cog):
             dungeon_master = ctx.user
 
         try:
-            party = service.create_party(name, channel.id, dungeon_master.id)
+            party = service.create(name, channel.id, dungeon_master.id)
             await ctx.respond(
-                f"Party `{party.name}` created with dungeon master {util.mention_user(party.dungeon_master_id)}"
+                f"Behold, the `{party.name}` party was seighted with {util.mention_user(party.dungeon_master_id)} as their dungeon master"
             )
         except Exception as ex:
             await handle_exception(ex, ctx.respond)
@@ -42,7 +42,9 @@ class PartyCommand(commands.Cog):
         executer_id = ctx.user.id
 
         try:
-            service.delete_party(executer_id, channel_id)
-            await ctx.respond("The party was resolved.")
+            party = service.delete(executer_id, channel_id)
+            await ctx.respond(
+                f"There are no more adventures for {party.name} to go on. Farewell, my dear friends!"
+            )
         except Exception as ex:
             await handle_exception(ex, ctx.respond)

@@ -49,3 +49,10 @@ class CharacterUnsupportedContentTypeException(ErnaException):
 class UserHasAlreadyCharacterException(ErnaException):
     def __init__(self, user_id: str, name: str) -> None:
         self.user_message = f"Only one servant per master allowed! There is already {name} on the side of {mention_user(user_id)}."
+
+
+class CharacterNotFoundException(ErnaException):
+    def __init__(self, name: str) -> None:
+        self.user_message = (
+            f"Who's that? I don't know anyone by name {name} around here!"
+        )

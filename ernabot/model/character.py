@@ -9,7 +9,7 @@ class Character(BaseModel):
     party = peewee.ForeignKeyField(Party, on_delete="CASCADE")
     name = peewee.CharField()
     description = peewee.CharField()
-    picture = peewee.BlobField(null=True)
+    avatar = peewee.BlobField(null=True)
     discord_user_id = peewee.UUIDField()
 
     class Meta(BaseModel.Meta):
