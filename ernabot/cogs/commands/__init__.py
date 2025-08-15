@@ -1,6 +1,6 @@
 import discord
 
-from ernabot.cogs.commands.charcter_command import CharacterCommand
+from ernabot.cogs.commands.character_command import CharacterCommand
 from ernabot.cogs.commands.party_command import PartyCommand
 
 

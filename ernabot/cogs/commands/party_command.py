@@ -10,6 +10,7 @@ class PartyCommand(commands.Cog):
 
     @group.command()
     async def create(
+        self,
         ctx: discord.ApplicationContext,
         name: discord.Option(str, "The name of the party"),  # type: ignore
         channel: discord.Option(  # type: ignore
@@ -37,7 +38,7 @@ class PartyCommand(commands.Cog):
             await handle_exception(ex, ctx.respond)
 
     @group.command()
-    async def delete(ctx: discord.ApplicationContext):
+    async def delete(self, ctx: discord.ApplicationContext):
         channel_id = ctx.channel.id
         executer_id = ctx.user.id
 

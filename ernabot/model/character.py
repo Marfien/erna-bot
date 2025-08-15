@@ -12,7 +12,7 @@ class Character(BaseModel):
     avatar = peewee.BlobField(null=True)
     discord_user_id = peewee.UUIDField()
 
-    class Meta(BaseModel.Meta):
+    class Meta:
         constraints = [
             peewee.SQL("UNIQUE(party,name)"),
             peewee.SQL("UNIQUE(party,discord_user_id)"),
@@ -26,7 +26,7 @@ class StatusEffect(BaseModel):
     applied_at = peewee.DateTimeField()
     extra = peewee.CharField()
 
-    class Meta(BaseModel.Meta):
+    class Meta:
         constraints = [
             peewee.SQL("UNIQUE(character,description)"),
         ]
@@ -38,5 +38,5 @@ class InventoryItem(BaseModel):
     name = peewee.CharField()
     amount = peewee.IntegerField(default=1)
 
-    class Meta(BaseModel.Meta):
+    class Meta:
         constraints = [peewee.SQL("UNIQUE(character,name)")]
